@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Electronics Store{% endblock %}</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    .card-img-top {
+        width: 100%; /* Ensures that the image takes up the full width of the card */
+        height: 200px; /* Fixed image height */
+        object-fit: contain; /* Ensures the image scales to fit completely */
+        object-position: center; /* Centers the image */
+    }
+    .card {
+        height: 100%; /* Ensures all cards in a row have the same height */
+    }
+</style>
+
+</head>
+<body>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">Electronics Store</a>
+
+        <form class="d-flex" method="get" action="{% url 'home' %}">
+            <input class="form-control me-2" type="search" placeholder="Search products" aria-label="Search" name="q">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+
+        <div class="d-flex ms-auto">
+            <a href="{% url 'show_cart' %}" class="nav-link">
+                Cart
+                <span class="badge badge-secondary">
+                    {{ request.user.cartitem_set.count }}
+                </span>
+            </a>
+            <a class="btn btn-outline-danger ms-3" href="/logout">Logout</a>
+        </div>
+    </div>
+</nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
